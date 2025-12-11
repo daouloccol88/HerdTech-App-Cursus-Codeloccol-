@@ -11,8 +11,8 @@ export default function FirstTimeDataLoader() {
     // USERS
     // --------------------
     const users = [
-      { id: 1, name: "Farmer Alpha", email: "alpha@farm.com" },
-      { id: 2, name: "Farmer Beta", email: "beta@farm.com" },
+      { id: 1, name: "Farmer Alpha", password: "123", email: "alpha@farm.com" },
+      { id: 2, name: "Farmer Beta", password: "123", email: "beta@farm.com" },
     ];
 
     // --------------------

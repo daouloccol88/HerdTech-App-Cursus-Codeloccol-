@@ -1,3 +1,138 @@
-body {
-  font-family: "Roboto", sans-serif;
+/*---------------The Theming--------------------------------*/
+:root {
+  --ff: "", sans-serif;
+  --main-blue: #001aff;
+  --main-ease: cubic-bezier(0.65, 0.05, 0.36, 1);
 }
+:root {
+  --primary: hsl(103, 45%, 49%);
+  /* bg-colors */
+  --bg-dark: hsl(0, 0%, 10%);
+  --bg: hsl(0, 0%, 15%);
+  --bg-light: hsl(0, 0%, 20%);
+  /* text-colors */
+  --text: hsl(0, 0%, 95%);
+  --text-muted: hsl(0, 0%, 60%);
+  --text-color-dark: var(--text);
+  /* shadows */
+  --shadow-s: inset 0 1px 2px #ffffff30, /* top highlight */ 0 1px 2px #00000030,
+    /* dark shadow */ 0 2px 4px #00000015; /* soft shadow */
+  --shadow-m: inset 0 1px 2px #ffffff50, /* top highlight */ 0 2px 4px #00000030,
+    /* dark shadow */ 0 4px 8px #00000015; /* soft shadow */
+  --shadow-l: inset 0 1px 2px #ffffff70, /* top highlight */ 0 4px 6px #00000030,
+    /* dark shadow */ 0 6px 15px #00000015; /* soft shadow */
+}
+.themed.light {
+  --primary: hsl(103, 45%, 49%);
+  /* bg-colors */
+  --bg-dark: hsl(0, 0%, 85%);
+  --bg: hsl(0, 0%, 90%);
+  --bg-light: hsl(0, 0%, 100%);
+  /* text-colors */
+  --text: hsl(0, 0%, 4%);
+  --text-muted: hsl(0, 0%, 30%);
+}
+
+body,
+a,
+i,
+label,
+button,
+div {
+  color: var(--text) !important;
+}
+/* Shadows colors*/
+.thm-shadow-s {
+  box-shadow: var(--shadow-s);
+}
+.thm-shadow-m {
+  box-shadow: var(--shadow-m);
+}
+.thm-shadow-l {
+  box-shadow: var(--shadow-l);
+}
+
+/* Background colors*/
+.thm-bg-dark {
+  background-color: var(--bg-dark) !important;
+}
+.thm-bg {
+  background-color: var(--bg) !important;
+}
+.thm-bg-light {
+  background-color: var(--bg-light) !important;
+}
+
+.thm-bg-primary {
+  background-color: var(--primary) !important;
+}
+
+/*Text colors and stuff*/
+a {
+  text-decoration: none;
+}
+
+path.thm-path {
+  fill: var(--text-muted);
+}
+
+.thm-text-primary {
+  color: var(--primary);
+}
+
+/*--------------------------End of Theming-----------------------------*/
+
+.bg-login {
+  background-image: url("/Login_img.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* OUTLINED INPUT STYLES */
+
+.outlined-input {
+  position: relative;
+}
+
+.outlined-input input {
+  color: var(--text);
+  height: 4rem;
+  outline: 1px solid var(--primary);
+  border-radius: 5px;
+  border: none;
+  background-color: var(--bg-light);
+  padding-left: 20px;
+  font-size: 20px;
+  transition: 0.1s var(--main-ease);
+}
+
+.outlined-input label {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+  background-color: var(--bg-light);
+  transition: 0.2s var(--main-ease);
+  pointer-events: none;
+  padding: 0 5px;
+}
+
+.outlined-input input:not(:placeholder-shown) ~ label,
+.outlined-input input:focus ~ label {
+  top: 0px;
+  left: 10px;
+  font-size: 1rem;
+}
+
+.outlined-input input:focus {
+  outline: 1px solid var(--main-blue) !important;
+}
+.outlined-input input:hover {
+  outline: 1px solid var(--main-blue);
+}
+.outlined-input input:focus ~ label {
+  color: var(--text) !important;
+}
+
+/* END OUTLINED INPUT STYLES */
