@@ -1,10 +1,30 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import NavCardLink from "./NavCardLink";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const router = useRouter();
+  const [countNomtifications, setCountNomtifications] = useState(0);
+
+  const loadCount = () => {
+    const saved = JSON.parse(localStorage.getItem("notifications") || []);
+    setCountNomtifications(saved.length);
+  };
+
+  useEffect(() => {
+    const user = localStorage.getItem("currentUser");
+    if (!user) router.push("/login");
+    loadCount(); // initial load
+
+    // 🔥 Listen for changes from ANY component
+    const handler = () => loadCount();
+
+    window.addEventListener("storage", handler);
+
+    return () => window.removeEventListener("storage", handler);
+  }, []);
 
   const toggleLight = () => {
     document.body.classList.toggle("light");
@@ -19,7 +39,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky-top thm-shadow-l pb-4 thm-bg">
+    <nav className="thm-shadow-l pb-4 thm-bg">
       {/*------------------------------TOP PART------------------------------------*/}
       <div className="d-flex justify-content-between">
         <div>
@@ -50,6 +70,7 @@ const Navbar = () => {
               type="text"
               className="form-control thm-bg-light"
               placeholder="Recherchez des outils, de l'aide et bien plus encore..."
+              disabled={true}
             />
             <label htmlFor="floatingInputGroup1">
               Recherchez des outils, de l'aide et bien plus encore...
@@ -308,6 +329,12 @@ const Navbar = () => {
         </div>
 
         <div style={{ width: "13%" }}>
+          <span
+            className="bg-danger position-absolute text-white top-25 rounded-circle fs-5 px-1 translate-middle"
+            style={{ zIndex: "1000" }}
+          >
+            {countNomtifications}
+          </span>
           <Link href={"/notification"}>
             <NavCardLink
               svg={

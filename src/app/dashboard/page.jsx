@@ -5,12 +5,6 @@ import { useRouter } from "next/navigation";
 
 export default function DashboardPage() {
   const router = useRouter();
-
-  useEffect(() => {
-    const user = localStorage.getItem("currentUser");
-    if (!user) router.push("/login");
-  }, []);
-
   const [counts, setCounts] = useState({
     vache: 0,
     taureau: 0,
@@ -42,7 +36,7 @@ export default function DashboardPage() {
   }, [router]);
 
   return (
-    <div className="thm-bg-dark pt-4" style={{ height: "100vh" }}>
+    <div className="thm-bg-dark pt-4 min-vh-100">
       <h1>Dashboard</h1>
       <p>Number of vache: {counts.vache}</p>
       <p>Number of taureau: {counts.taureau}</p>

@@ -43,7 +43,7 @@ export default function FirstTimeDataLoader() {
     const animals = [...animalsUser1, ...animalsUser2];
 
     // --------------------
-    // TODOS GENERATOR ✅
+    // TODOS GENERATOR
     // --------------------
     const todoNames = [
       "Nettoyer l’étable",
@@ -72,14 +72,53 @@ export default function FirstTimeDataLoader() {
     const todos = generateTodos(20);
 
     // --------------------
+    // NOTIFICATIONS GENERATOR ✅ NEW
+    // --------------------
+
+    const notifCategories = [
+      "Notification de routine",
+      "Notification de vérification",
+      "Notification de danger",
+      "Notification critique",
+    ];
+
+    const notifMessages = [
+      "Un animal a besoin d’une vérification.",
+      "La réserve de fourrage est basse.",
+      "Une visite vétérinaire est prévue bientôt.",
+      "Un nouvel animal a été ajouté à l’enclos.",
+      "Température anormale détectée dans l’étable.",
+      "Nettoyage général recommandé aujourd’hui.",
+      "Votre troupeau est en bonne santé.",
+      "Un veau est né ce matin.",
+      "Clôture latérale endommagée.",
+      "Mise à jour de votre tableau de bord disponible.",
+    ];
+
+    const generateNotifications = (count) => {
+      return Array.from({ length: count }, (_, i) => ({
+        id: Date.now() + i + 5000,
+        category:
+          notifCategories[Math.floor(Math.random() * notifCategories.length)],
+        content:
+          notifMessages[Math.floor(Math.random() * notifMessages.length)],
+        userId: Math.random() < 0.5 ? 1 : 2,
+        date: new Date().toISOString(),
+      }));
+    };
+
+    const notifications = generateNotifications(15);
+
+    // --------------------
     // SAVE TO LOCALSTORAGE
     // --------------------
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("animals", JSON.stringify(animals));
     localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem("notifications", JSON.stringify(notifications));
     localStorage.setItem("farm_initialized", "true");
 
-    console.log("✅ Farm demo data initialized");
+    console.log("✅ Farm demo data initialized with notifications");
   }, []);
 
   return null;

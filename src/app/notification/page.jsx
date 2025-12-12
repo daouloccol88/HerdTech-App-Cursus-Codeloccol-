@@ -1,11 +1,30 @@
+"use client";
+import { useEffect, useState } from "react";
+import NotificationCard from "@/components/notification/NotificationCard";
 import React from "react";
+import NotificationNumber from "@/components/notification/NotificationNumber";
 
 const page = () => {
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("notifications") || "[]");
+    setNotifications(saved);
+  }, []);
+
+  const handleDelete = (id) => {
+    const updated = notifications.filter((n) => n.id !== id);
+    setNotifications(updated);
+    localStorage.setItem("notifications", JSON.stringify(updated));
+    // 🔥 Force update across all components
+    window.dispatchEvent(new Event("storage"));
+  };
+
   return (
-    <div className="thm-bg-dark vh-100 pt-4">
+    <div className="thm-bg-dark min-vh-100 py-4">
       <div className="container-fluid">
         <div className="d-flex">
-          <div className="thm-bg-light thm-shadow">
+          <div className="thm-bg-light thm-shadow-m p-1 rounded ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="60"
@@ -30,10 +49,55 @@ const page = () => {
               />
             </svg>
           </div>
-          <div>
-            <p className="fs-3">Notifications</p>
+          <div className="pt-3 ms-2">
+            <p className="fs-3 no-wrap">Notifications</p>
           </div>
         </div>
+      </div>
+
+      <div className="container-fluid mt-4">
+        <div className="row">
+          <div className="col-lg-3">
+            <NotificationNumber
+              category="Notification de routine"
+              notifications={notifications}
+            />
+          </div>
+          <div className="col-lg-3">
+            <NotificationNumber
+              category="Notification de vérification"
+              notifications={notifications}
+            />
+          </div>
+          <div className="col-lg-3">
+            <NotificationNumber
+              category="Notification de danger"
+              notifications={notifications}
+            />
+          </div>
+          <div className="col-lg-3">
+            <NotificationNumber
+              category="Notification critique"
+              notifications={notifications}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="container mt-4">
+        {notifications.length === 0 ? (
+          <p className="fs-5">Aucune notification disponible.</p>
+        ) : (
+          notifications.map((notif) => (
+            <NotificationCard
+              key={notif.id}
+              id={notif.id}
+              category={notif.category}
+              content={notif.content}
+              onDelete={handleDelete}
+            />
+          ))
+        )}
       </div>
     </div>
   );
