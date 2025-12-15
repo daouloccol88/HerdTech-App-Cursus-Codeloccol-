@@ -2,46 +2,107 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import TopPartDashboard from "@/components/dashboard/TopPartDashboard";
+import LiveStockElement from "@/components/dashboard/LiveStockElement";
+import MapElement from "@/components/dashboard/MapElement";
+import StorageElement from "@/components/dashboard/StorageElement";
+import TaskElement from "@/components/dashboard/TaskElement";
+import NotificationElement from "@/components/dashboard/NotificationElement";
+import TagElement from "@/components/dashboard/TagElement";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [counts, setCounts] = useState({
-    vache: 0,
-    taureau: 0,
-    mouton: 0,
-    brebis: 0,
-  });
+  const [currentUser, setCurrentUser] = useState(null);
+  const [userAnimals, setUserAnimals] = useState([]);
+  const [userTodos, setUserTodos] = useState([]);
+  const [userNotifications, setUserNotifications] = useState([]);
+  const [userTags, setUserTags] = useState([]);
 
   useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (!currentUser) {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    if (!user) {
       router.replace("/login");
       return;
     }
+    setCurrentUser(user);
 
+    // Load collections from localStorage
     const animals = JSON.parse(localStorage.getItem("animals")) || [];
+    const todos = JSON.parse(localStorage.getItem("todos")) || [];
+    const notifications =
+      JSON.parse(localStorage.getItem("notifications")) || [];
+    const tags = JSON.parse(localStorage.getItem("tags")) || [];
 
-    // Filter animals by user
-    const userAnimals = animals.filter((a) => a.userId === currentUser.id);
-
-    // Count by category
-    const categoryCounts = {
-      vache: userAnimals.filter((a) => a.category === "vache").length,
-      taureau: userAnimals.filter((a) => a.category === "taureau").length,
-      mouton: userAnimals.filter((a) => a.category === "mouton").length,
-      brebis: userAnimals.filter((a) => a.category === "brebis").length,
-    };
-
-    setCounts(categoryCounts);
+    // Filter by current user
+    setUserAnimals(animals.filter((a) => a.userId === user.id));
+    setUserTodos(todos.filter((t) => t.userId === user.id));
+    setUserNotifications(notifications.filter((n) => n.userId === user.id));
+    setUserTags(tags.filter((t) => t.userId === user.id));
   }, [router]);
 
   return (
-    <div className="thm-bg-dark pt-4 min-vh-100">
-      <h1>Dashboard</h1>
-      <p>Number of vache: {counts.vache}</p>
-      <p>Number of taureau: {counts.taureau}</p>
-      <p>Number of mouton: {counts.mouton}</p>
-      <p>Number of brebis: {counts.brebis}</p>
+    <div className="thm-bg-dark py-4 min-vh-100">
+      <div className="container">
+        <div className="d-flex justify-content-between">
+          <div className="d-flex">
+            <div className="thm-bg-light thm-shadow-m p-1 rounded ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="60"
+                height="60"
+                viewBox="0 0 100 100"
+              >
+                <path
+                  d="M36.5 81.3c-.7-.2-1.6-1.2-1.7-1.9q-.2-1.4.8-2.3l.6-.5h22.5c24.8 0 23.1 0 23.8 1.2.7 1.3 0 2.9-1.3 3.3a1499.4 1499.4 0 0 1-44.7.1m-1-13.8q-1.4-1.3-.3-3c.7-1.1-.1-1.1 23.5-1.1 24.1 0 22.9 0 23.7 1.2q.7 1 .1 2.3c-.6 1.4 1 1.3-24 1.3H36.3Zm.1-13.5q-1.2-1-.7-2.5.3-1.2 1.7-1.5c1-.3 19.5-.2 20.4 0 1.3.5 2 2.1 1.3 3.4s-.2 1.2-11.6 1.2H36.2ZM22.8 26.4c0-2.6 0-3 .4-3.3.3-.3 3-.3 35.8-.3s35.6 0 35.8.3q.3.3.4 3.3v3H22.8Z"
+                  style={{
+                    display: "inline",
+                    fill: "#67bb44",
+                    strokeWidth: 0.2,
+                  }}
+                />
+                <path
+                  className="thm-path"
+                  d="M22.3 99.7a6 6 0 0 1-3.8-3.4C18 95.3 18 94 18 59c0-35.2 0-36.3.4-37.3a6 6 0 0 1 3-3.1l1-.5h73l1 .5a6 6 0 0 1 3 3.1c.4 1 .4 2 .4 37.3s0 36.3-.4 37.3a6 6 0 0 1-3 3.1l-1 .5H59.3c-28.8 0-36.4 0-37-.2M95 94.8c.1-.3.2-10 .2-30.4L95 34.3H22.9v30.2l.1 30.4c.2.3 6.2.3 36 .3 35.2 0 35.8 0 36-.4m.2-68.4q0-3-.4-3.3c-.2-.3-3-.3-35.8-.3a384 384 0 0 0-35.8.3c-.4.3-.4.7-.4 3.3v3h72.4ZM4.3 81.7a6 6 0 0 1-3.8-3.4C0 77.3 0 76 0 41 .1 5.8.1 4.7.5 3.7a6 6 0 0 1 3-3.1l1-.5h73.2l1 .5q2.3 1.4 3 3.5.3.9.3 4.5c0 4-.2 4.8-1.2 5.3-.8.4-2 .4-2.6 0-.9-.7-1-1.2-1-5 0-2.9 0-3.5-.3-3.8S73 4.8 41 4.8c-32 0-35.6 0-35.9.3S4.8 9 4.8 41c0 32 0 35.6.3 35.9s.9.3 3.7.3c3.8 0 4.4.1 4.9 1.2.6 1.2 0 2.8-1.2 3.3-.9.4-7 .4-8.2 0"
+                  style={{
+                    display: "inline",
+                    strokeWidth: 0.2,
+                  }}
+                />
+              </svg>
+            </div>
+            <div className="pt-3 ms-2">
+              <p className="fs-3 no-wrap">Tableau de bord</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <TopPartDashboard />
+
+      <div className="container thm-bg mt-4 rounded-3 thm-shadow-m p-3">
+        <div className="row">
+          <div className="col-lg-4">
+            <MapElement />
+          </div>
+          <div className="col-lg-4">
+            <LiveStockElement animals={userAnimals} />
+          </div>
+          <div className="col-lg-4">
+            <StorageElement />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-4">
+            <TagElement tags={userTags} animals={userAnimals} />
+          </div>
+          <div className="col-lg-4">
+            <TaskElement tasks={userTodos} />
+          </div>
+          <div className="col-lg-4">
+            <NotificationElement notifications={userNotifications} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -153,7 +153,7 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={"Enter your email"}
-                    width="100%"
+                    width="80%"
                   />
                 </div>
 
@@ -163,7 +163,7 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder={"Enter your password"}
-                    width="100%"
+                    width="80%"
                   />
                 </div>
 
@@ -192,11 +192,11 @@ export default function LoginPage() {
                   {" "}
                   <p className="py-2 fs-5">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="checkDefault"
-                    />
+                    />{" "}
                     Se souvenir de moi
                   </p>
                 </div>

@@ -5,11 +5,18 @@ import React from "react";
 import NotificationNumber from "@/components/notification/NotificationNumber";
 
 const page = () => {
+  const [currentUser, setCurrentUser] = useState(null);
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    if (!user) {
+      router.replace("/login");
+      return;
+    }
+    setCurrentUser(user);
     const saved = JSON.parse(localStorage.getItem("notifications") || "[]");
-    setNotifications(saved);
+    setNotifications(saved.filter((n) => n.userId === user.id));
   }, []);
 
   const handleDelete = (id) => {

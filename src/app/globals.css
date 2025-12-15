@@ -35,9 +35,13 @@
 
 body,
 a,
+p,
 label,
 button,
-div {
+span,
+div,
+td,
+th {
   color: var(--text) !important;
 }
 /* Shadows colors*/

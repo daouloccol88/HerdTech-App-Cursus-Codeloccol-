@@ -11,35 +11,82 @@ export default function FirstTimeDataLoader() {
     // USERS
     // --------------------
     const users = [
-      { id: 1, name: "Farmer Alpha", password: "123", email: "alpha@farm.com" },
-      { id: 2, name: "Farmer Beta", password: "123", email: "beta@farm.com" },
+      {
+        id: generateIdCustomLength(10),
+        name: "Farmer Alpha",
+        password: "123",
+        email: "alpha@farm.com",
+      },
+      {
+        id: generateIdCustomLength(10),
+        name: "Farmer Beta",
+        password: "123",
+        email: "beta@farm.com",
+      },
     ];
+
+    function getRandomUserId(users) {
+      if (!users || users.length === 0) return null;
+      return users[Math.floor(Math.random() * users.length)].id;
+    }
+    function getUserId(index) {
+      if (!users || users.length === 0) return null;
+      return users[index].id;
+    }
+
+    function generateIdCustomLength(length) {
+      const chars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let id = "";
+
+      for (let i = 0; i < length; i++) {
+        id += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+
+      return id;
+    }
+
+    // --------------------
+    // TAGS (NEW COLLECTION)
+    // --------------------
+    const tag = ["TAG_1", "TAG_2", "TAG_3", "TAG_4", "TAG_5"];
+
+    const tags = tag.map((t) => ({
+      id: generateIdCustomLength(24),
+      label: t,
+      userId: getRandomUserId(users),
+    }));
 
     // --------------------
     // ANIMALS GENERATOR
     // --------------------
-    const categories = ["vache", "taureau", "chèvre", "mouton"];
-    const statusList = ["sain", "malade", "vendu"];
+    const categories = ["bovins", "ovins"];
+    const statusList = ["sain", "malade", "vendu", "mort"];
     const sexList = ["male", "female"];
 
     const generateAnimals = (count, userId) => {
-      return Array.from({ length: count }, (_, i) => ({
-        id: Date.now() + i + userId * 1000,
-        RFIDTag: Math.floor(100000 + Math.random() * 900000),
-        category: categories[Math.floor(Math.random() * categories.length)],
-        sex: sexList[Math.floor(Math.random() * sexList.length)],
-        birthDate: new Date(
-          2019 + Math.floor(Math.random() * 6),
-          Math.floor(Math.random() * 12),
-          Math.floor(Math.random() * 28)
-        ).toISOString(),
-        status: statusList[Math.floor(Math.random() * statusList.length)],
-        userId,
-      }));
+      return Array.from({ length: count }, (_, i) => {
+        // pick a random tag from the tag collection
+        const randomTag = tags[Math.floor(Math.random() * tags.length)].label;
+
+        return {
+          id: generateIdCustomLength(20),
+          RFIDTag: randomTag, // ✅ TAG APPLIED HERE
+          category: categories[Math.floor(Math.random() * categories.length)],
+          sex: sexList[Math.floor(Math.random() * sexList.length)],
+          birthDate: new Date(
+            2019 + Math.floor(Math.random() * 6),
+            Math.floor(Math.random() * 12),
+            Math.floor(Math.random() * 28)
+          ).toISOString(),
+          status: statusList[Math.floor(Math.random() * statusList.length)],
+          userId: userId,
+        };
+      });
     };
 
-    const animalsUser1 = generateAnimals(30, 1);
-    const animalsUser2 = generateAnimals(40, 2);
+    const animalsUser1 = generateAnimals(30, getUserId(0));
+    const animalsUser2 = generateAnimals(40, getUserId(1));
     const animals = [...animalsUser1, ...animalsUser2];
 
     // --------------------
@@ -65,16 +112,15 @@ export default function FirstTimeDataLoader() {
         id: Date.now() + i,
         name: todoNames[Math.floor(Math.random() * todoNames.length)],
         status: todoStatus[Math.floor(Math.random() * todoStatus.length)],
-        userId: Math.random() < 0.5 ? 1 : 2,
+        userId: getRandomUserId(users),
       }));
     };
 
     const todos = generateTodos(20);
 
     // --------------------
-    // NOTIFICATIONS GENERATOR ✅ NEW
+    // NOTIFICATIONS GENERATOR
     // --------------------
-
     const notifCategories = [
       "Notification de routine",
       "Notification de vérification",
@@ -102,7 +148,7 @@ export default function FirstTimeDataLoader() {
           notifCategories[Math.floor(Math.random() * notifCategories.length)],
         content:
           notifMessages[Math.floor(Math.random() * notifMessages.length)],
-        userId: Math.random() < 0.5 ? 1 : 2,
+        userId: getRandomUserId(users),
         date: new Date().toISOString(),
       }));
     };
@@ -116,9 +162,11 @@ export default function FirstTimeDataLoader() {
     localStorage.setItem("animals", JSON.stringify(animals));
     localStorage.setItem("todos", JSON.stringify(todos));
     localStorage.setItem("notifications", JSON.stringify(notifications));
+    localStorage.setItem("tags", JSON.stringify(tags)); // collection
+
     localStorage.setItem("farm_initialized", "true");
 
-    console.log("✅ Farm demo data initialized with notifications");
+    console.log("✅ Farm demo data initialized with tags applied to animals");
   }, []);
 
   return null;

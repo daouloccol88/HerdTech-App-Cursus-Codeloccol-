@@ -3,7 +3,7 @@ import React from "react";
 const MaterialInput = ({ value, onChange, placeholder, type, width }) => {
   return (
     <div>
-      <div className="outlined-input bg-primary">
+      <div className="outlined-input">
         <input
           type={type}
           name={placeholder}
