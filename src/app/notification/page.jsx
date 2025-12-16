@@ -88,25 +88,25 @@ const page = () => {
 
       <div className="container-fluid mt-4">
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-3 mt-3">
             <NotificationNumber
               category="Notification de routine"
               notifications={notifications}
             />
           </div>
-          <div className="col-lg-3">
+          <div className="col-lg-3 mt-3">
             <NotificationNumber
               category="Notification de vérification"
               notifications={notifications}
             />
           </div>
-          <div className="col-lg-3">
+          <div className="col-lg-3 mt-3">
             <NotificationNumber
               category="Notification de danger"
               notifications={notifications}
             />
           </div>
-          <div className="col-lg-3">
+          <div className="col-lg-3 mt-3">
             <NotificationNumber
               category="Notification critique"
               notifications={notifications}

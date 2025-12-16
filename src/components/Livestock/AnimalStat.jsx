@@ -11,7 +11,7 @@ const AnimalStats = ({ animals }) => {
   return (
     <div className="container mt-4">
       <div className="row mb-4">
-        <div className="col-md-6 col-sm-12">
+        <div className="col-lg-6 col-md-12">
           <div className="thm-bg thm-shadow-m p-3 rounded-2 text-center">
             <div className="d-flex justify-content-evenly">
               <div>
@@ -93,7 +93,7 @@ const AnimalStats = ({ animals }) => {
             </div>
           </div>
         </div>
-        <div className="col-md-6 col-sm-12">
+        <div className="col-lg-6 col-md-12">
           <div className="thm-bg thm-shadow-m p-3 rounded-2 text-center">
             <div className="d-flex justify-content-evenly">
               <div>

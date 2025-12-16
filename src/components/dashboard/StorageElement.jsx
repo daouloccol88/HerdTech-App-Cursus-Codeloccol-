@@ -6,7 +6,7 @@ const StorageElement = () => {
       className="thm-bg-light mt-4 thm-shadow-m  rounded-3 p-3"
       style={{ height: "300px" }}
     >
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between mb-3">
         <div>
           <span className="fw-bold">Status</span>
         </div>
@@ -14,7 +14,7 @@ const StorageElement = () => {
           <span>Status</span>
         </div>
       </div>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between mb-3">
         <div>
           <span className="fw-bold">Condition</span>
         </div>
@@ -22,7 +22,7 @@ const StorageElement = () => {
           <span>Condition</span>
         </div>
       </div>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between mb-3">
         <div>
           <span className="fw-bold">Power</span>
         </div>
@@ -30,7 +30,7 @@ const StorageElement = () => {
           <span>Power</span>
         </div>
       </div>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between mb-3">
         <div>
           <span className="fw-bold">Door</span>
         </div>
@@ -38,7 +38,7 @@ const StorageElement = () => {
           <span>Door</span>
         </div>
       </div>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between mb-3">
         <div>
           <span className="fw-bold">Temperature</span>
         </div>
@@ -46,7 +46,7 @@ const StorageElement = () => {
           <span>Temperature</span>
         </div>
       </div>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between mb-3">
         <div>
           <span className="fw-bold">Humidity</span>
         </div>

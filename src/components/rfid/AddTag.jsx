@@ -23,7 +23,7 @@ const AddTag = ({ onAdded, userId }) => {
   };
 
   return (
-    <>
+    <div>
       <button
         className="btn btn-success thm-bg-primary thm-shadow-m"
         onClick={() => setShow(true)}
@@ -72,7 +72,7 @@ const AddTag = ({ onAdded, userId }) => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

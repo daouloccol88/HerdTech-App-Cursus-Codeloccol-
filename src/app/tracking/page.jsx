@@ -72,7 +72,7 @@ const TagsPage = () => {
         <p className="fs-3">Liste des animaux</p>
         <div className="container-fluid mx-3">
           <div className="row">
-            <div className="col-lg-6  justify-content-start">
+            <div className="col-lg-6 mt-3 ">
               <span className="fs-5">
                 Group by:{" "}
                 <span className="thm-bg-primary p-1 rounded-1 text-white me-2">
@@ -92,14 +92,14 @@ const TagsPage = () => {
                 </span>
               </span>
             </div>
-            <div className="col-lg-6 d-flex justify-content-end">
+            <div className="col-lg-6 mt-3 mx-auto">
               <AddTag userId={currentUserId} onAdded={refreshTags} />
             </div>
           </div>
         </div>
         <div className="mt-4">
           <div className="table-responsive">
-            <table className="table table-hover mb-0">
+            <table className="table table-hover">
               <thead className="table-light">
                 <tr>
                   <th className="thm-bg-dark">

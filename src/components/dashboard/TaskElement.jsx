@@ -9,10 +9,16 @@ const TaskElement = ({ tasks }) => {
       style={{ height: "300px" }}
     >
       <div>
-        <p>Nombre de taches à faire: {todoItems.length}</p>
+        <p className="fs-4">
+          <i className="bi bi-clipboard-check-fill fs-2 text-warning"></i>{" "}
+          Nombre de taches à faire: {todoItems.length}
+        </p>
       </div>
       <div>
-        <p>Nombre de taches à effectuer: {doneItems.length}</p>
+        <p className="fs-4">
+          <i className="bi bi-clipboard-x-fill fs-2 text-success"></i> Nombre de
+          taches effectuer: {doneItems.length}
+        </p>
       </div>
     </div>
   );

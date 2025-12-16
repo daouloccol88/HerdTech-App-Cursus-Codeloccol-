@@ -139,3 +139,11 @@ path.thm-path {
 }
 
 /* END OUTLINED INPUT STYLES */
+/* Offset content ONLY on small screens */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

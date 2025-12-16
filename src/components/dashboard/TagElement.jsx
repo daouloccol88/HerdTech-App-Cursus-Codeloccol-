@@ -14,10 +14,13 @@ const TagElement = ({ tags, animals }) => {
       {tags.map((tag) => (
         <div key={tag.id} className="d-flex">
           <div>
-            <p>{tag.label}:</p>
+            <i class="bi bi-tags-fill thm-text-primary fs-2"></i>
           </div>
           <div>
-            <p className="ms-2">{countAnimalsForTag(tag.label)}</p>
+            <p className="fs-4">{tag.label}:</p>
+          </div>
+          <div>
+            <p className="ms-2 fs-4">{countAnimalsForTag(tag.label)}</p>
           </div>
         </div>
       ))}

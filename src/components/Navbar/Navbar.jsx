@@ -306,8 +306,8 @@ const Navbar = () => {
 
         <div style={{ width: "13%" }}>
           <span
-            className="bg-danger position-absolute text-white top-25 rounded-circle fs-5 px-1 translate-middle"
-            style={{ zIndex: "1000" }}
+            className="bg-danger position-absolute text-white text-center top-25 rounded-circle fs-5 px-1 translate-middle"
+            style={{ zIndex: "10", width: "30px", height: "30px" }}
           >
             {count}
           </span>

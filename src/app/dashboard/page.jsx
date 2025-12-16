@@ -81,12 +81,18 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <TopPartDashboard />
+      <TopPartDashboard
+        markers={mapMarkers}
+        animals={userAnimals}
+        tags={userTags}
+        tasks={userTodos}
+        notifications={userNotifications}
+      />
 
       <div className="container thm-bg mt-4 rounded-3 thm-shadow-m p-3">
         <div className="row">
           <div className="col-lg-4">
-            <MapElement />
+            <MapElement markers={mapMarkers} />
           </div>
           <div className="col-lg-4">
             <LiveStockElement animals={userAnimals} />

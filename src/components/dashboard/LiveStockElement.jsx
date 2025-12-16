@@ -30,7 +30,7 @@ const LiveStockElement = ({ animals }) => {
           </svg>
         </div>
         <div>
-          <p>Taureaux: {count("bovins", "male")}</p>
+          <p className="fs-4 ms-4">Taureaux: {count("bovins", "male")}</p>
         </div>
       </div>
       <div className="d-flex">
@@ -52,7 +52,7 @@ const LiveStockElement = ({ animals }) => {
           </svg>
         </div>
         <div>
-          <p>Vaches: {count("ovins", "female")}</p>
+          <p className="fs-4 ms-4">Vaches: {count("ovins", "female")}</p>
         </div>
       </div>
       <div className="d-flex">
@@ -74,7 +74,7 @@ const LiveStockElement = ({ animals }) => {
           </svg>
         </div>
         <div>
-          <p>Béliers: {count("ovins", "male")}</p>
+          <p className="fs-4 ms-4">Béliers: {count("ovins", "male")}</p>
         </div>
       </div>
       <div className="d-flex">
@@ -98,7 +98,7 @@ const LiveStockElement = ({ animals }) => {
           </svg>
         </div>
         <div>
-          <p>Brebis: {count("ovins", "female")}</p>
+          <p className="fs-4 ms-4">Brebis: {count("ovins", "female")}</p>
         </div>
       </div>
     </div>
