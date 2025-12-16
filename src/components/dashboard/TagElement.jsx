@@ -14,7 +14,7 @@ const TagElement = ({ tags, animals }) => {
       {tags.map((tag) => (
         <div key={tag.id} className="d-flex">
           <div>
-            <i class="bi bi-tags-fill thm-text-primary fs-2"></i>
+            <i className="bi bi-tags-fill thm-text-primary fs-2"></i>
           </div>
           <div>
             <p className="fs-4">{tag.label}:</p>

@@ -11,21 +11,23 @@ const NotificationElement = ({ notifications }) => {
       style={{ height: "300px" }}
     >
       <p className="fs-4">
-        <i class="bi bi-check-circle-fill text-success"></i> Notifications de
-        routine: {countNotificationForCategory("Notification de routine")}
+        <i className="bi bi-check-circle-fill text-success"></i> Notifications
+        de routine: {countNotificationForCategory("Notification de routine")}
       </p>
       <p className="fs-4">
-        <i class="bi bi-question-circle-fill text-primary"></i> Notifications de
-        vérification:{" "}
+        <i className="bi bi-question-circle-fill text-primary"></i>{" "}
+        Notifications de vérification:{" "}
         {countNotificationForCategory("Notification de vérification")}
       </p>
       <p className="fs-4">
-        <i class="bi bi-exclamation-circle-fill text-warning"></i> Notifications
-        de danger: {countNotificationForCategory("Notification de danger")}
+        <i className="bi bi-exclamation-circle-fill text-warning"></i>{" "}
+        Notifications de danger:{" "}
+        {countNotificationForCategory("Notification de danger")}
       </p>
       <p className="fs-4">
-        <i class="bi bi-exclamation-circle-fill text-danger"></i> Notifications
-        critique: {countNotificationForCategory("Notification critique")}
+        <i className="bi bi-exclamation-circle-fill text-danger"></i>{" "}
+        Notifications critique:{" "}
+        {countNotificationForCategory("Notification critique")}
       </p>
     </div>
   );
