@@ -6,7 +6,10 @@ const LiveStockElement = ({ animals }) => {
       (a) => a.category === category && (sex ? a.sex === sex : true)
     ).length;
   return (
-    <div className="thm-bg-light mt-4 thm-shadow-m  rounded-3 p-3">
+    <div
+      className="thm-bg-light mt-4 thm-shadow-m  rounded-3 p-3"
+      style={{ height: "300px" }}
+    >
       <div className="d-flex">
         <div>
           <svg

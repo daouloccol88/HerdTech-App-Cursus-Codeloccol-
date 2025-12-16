@@ -3,43 +3,33 @@ import React, { useEffect, useState } from "react";
 import NavCardLink from "./NavCardLink";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useNotifications } from "@/utils/useNofications";
 
 const Navbar = () => {
   const router = useRouter();
-  const [countNomtifications, setCountNomtifications] = useState(0);
-
-  const loadCount = () => {
-    const saved = JSON.parse(localStorage.getItem("notifications") || []);
-    setCountNomtifications(saved.length);
-  };
-
-  useEffect(() => {
-    const user = localStorage.getItem("currentUser");
-    if (!user) router.push("/login");
-    loadCount(); // initial load
-
-    // 🔥 Listen for changes from ANY component
-    const handler = () => loadCount();
-
-    window.addEventListener("storage", handler);
-
-    return () => window.removeEventListener("storage", handler);
-  }, []);
+  const [currentUser, setCurrentUser] = useState(null);
+  const { count } = useNotifications();
 
   const toggleLight = () => {
     document.body.classList.toggle("light");
   };
 
   const handleLogout = () => {
-    // Remove connected user from localStorage
     localStorage.removeItem("currentUser");
-
-    // Redirect to login page
     router.push("/login");
   };
 
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    if (!user) {
+      router.replace("/login");
+    } else {
+      setCurrentUser(user);
+    }
+  }, [router]);
+
   return (
-    <nav className="thm-shadow-l pb-4 thm-bg">
+    <nav className="thm-shadow-l pb-4 thm-bg d-none d-lg-block">
       {/*------------------------------TOP PART------------------------------------*/}
       <div className="d-flex justify-content-between">
         <div>
@@ -58,24 +48,10 @@ const Navbar = () => {
           </svg>
         </div>
 
-        <div className="input-group mt-3" style={{ width: "40%", border: "0" }}>
-          <span
-            className="input-group-text text-dark thm-bg"
-            style={{ height: "58px" }}
-          >
-            <i className="bi bi-search fs-3"></i>
-          </span>
-          <div className="form-floating">
-            <input
-              type="text"
-              className="form-control thm-bg-light"
-              placeholder="Recherchez des outils, de l'aide et bien plus encore..."
-              disabled={true}
-            />
-            <label htmlFor="floatingInputGroup1">
-              Recherchez des outils, de l'aide et bien plus encore...
-            </label>
-          </div>
+        <div>
+          <p className="fs-2 text-center mt-3">
+            {currentUser && <span>Bienvennue, {currentUser.name}!</span>}
+          </p>
         </div>
 
         <div className="d-flex">
@@ -333,7 +309,7 @@ const Navbar = () => {
             className="bg-danger position-absolute text-white top-25 rounded-circle fs-5 px-1 translate-middle"
             style={{ zIndex: "1000" }}
           >
-            {countNomtifications}
+            {count}
           </span>
           <Link href={"/notification"}>
             <NavCardLink

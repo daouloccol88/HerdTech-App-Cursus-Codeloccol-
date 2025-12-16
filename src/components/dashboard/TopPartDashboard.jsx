@@ -6,7 +6,7 @@ const TopPartDashboard = () => {
       <div className="mt-4">
         <div className="container p-3 thm-bg rounded-3 thm-shadow-m">
           <div className="row">
-            <div className="col-lg-6">
+            <div className="col-xl-6 col-lg-12 mb-4">
               <div className="conatiner-fluid">
                 <div className="row">
                   <div className="col-3">
@@ -295,7 +295,12 @@ const TopPartDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-xl-6 col-lg-12">
+              <div className="thm-bg-light rounded-2 thm-shadow-m">
+                <p className="text-center fs-4">
+                  Coordonées: 13.495217679105107, 2.109454809067691
+                </p>
+              </div>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1952.4581512280963!2d2.1097528!3d13.4951524!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sfr!2sne!4v1765810162025!5m2!1sfr!2sne"
                 width="600"

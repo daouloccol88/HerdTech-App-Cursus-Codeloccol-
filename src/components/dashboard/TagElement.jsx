@@ -6,7 +6,10 @@ const TagElement = ({ tags, animals }) => {
   };
 
   return (
-    <div className="thm-bg-light mt-4 thm-shadow-m  rounded-3 p-3">
+    <div
+      className="thm-bg-light mt-4 thm-shadow-m  rounded-3 p-3"
+      style={{ height: "300px" }}
+    >
       <p>Listes des Tags RFID configuré</p>
       {tags.map((tag) => (
         <div key={tag.id} className="d-flex">

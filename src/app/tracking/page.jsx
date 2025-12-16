@@ -93,7 +93,7 @@ const TagsPage = () => {
               </span>
             </div>
             <div className="col-lg-6 d-flex justify-content-end">
-              <AddTag onAdded={refreshTags} />
+              <AddTag userId={currentUserId} onAdded={refreshTags} />
             </div>
           </div>
         </div>

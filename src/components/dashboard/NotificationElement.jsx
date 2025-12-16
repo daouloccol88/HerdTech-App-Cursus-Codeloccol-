@@ -5,7 +5,10 @@ const NotificationElement = ({ notifications }) => {
     return notifications.filter((n) => n.category === category).length;
   };
   return (
-    <div className="thm-bg-light mt-4 thm-shadow-m  rounded-3 p-3">
+    <div
+      className="thm-bg-light mt-4 thm-shadow-m  rounded-3 p-3"
+      style={{ height: "300px" }}
+    >
       <p>
         Notifications de routine:{" "}
         {countNotificationForCategory("Notification de routine")}

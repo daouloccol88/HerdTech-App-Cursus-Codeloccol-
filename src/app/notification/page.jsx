@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation"; // 🔹 needed
 import NotificationCard from "@/components/notification/NotificationCard";
-import React from "react";
 import NotificationNumber from "@/components/notification/NotificationNumber";
 
 const page = () => {
+  const router = useRouter();
   const [currentUser, setCurrentUser] = useState(null);
   const [notifications, setNotifications] = useState([]);
 
@@ -14,17 +15,40 @@ const page = () => {
       router.replace("/login");
       return;
     }
+
     setCurrentUser(user);
-    const saved = JSON.parse(localStorage.getItem("notifications") || "[]");
-    setNotifications(saved.filter((n) => n.userId === user.id));
-  }, []);
+
+    const allNotifications = JSON.parse(
+      localStorage.getItem("notifications") || "[]"
+    );
+    setNotifications(allNotifications.filter((n) => n.userId === user.id));
+
+    // 🔹 listen to cross-tab updates
+    const handleStorage = (e) => {
+      if (e.key === "notifications") {
+        const updated = JSON.parse(
+          localStorage.getItem("notifications") || "[]"
+        );
+        setNotifications(updated.filter((n) => n.userId === user.id));
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    window.dispatchEvent(new Event("notificationsUpdated"));
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener("notificationsUpdated", handleStorage);
+    };
+  }, [router]);
 
   const handleDelete = (id) => {
-    const updated = notifications.filter((n) => n.id !== id);
-    setNotifications(updated);
-    localStorage.setItem("notifications", JSON.stringify(updated));
-    // 🔥 Force update across all components
-    window.dispatchEvent(new Event("storage"));
+    const all = JSON.parse(localStorage.getItem("notifications") || "[]");
+    const updatedAll = all.filter((n) => n.id !== id);
+    localStorage.setItem("notifications", JSON.stringify(updatedAll));
+    setNotifications(updatedAll.filter((n) => n.userId === currentUser.id));
+
+    // 🔹 trigger custom event for same-tab update
+    window.dispatchEvent(new Event("notificationsUpdated"));
   };
 
   return (

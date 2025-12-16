@@ -3,12 +3,11 @@
 import React, { useState } from "react";
 import MaterialInput from "../MaterialInput";
 
-const AddTag = ({ onAdded }) => {
+const AddTag = ({ onAdded, userId }) => {
   const [label, setLabel] = useState("");
   const [show, setShow] = useState(false);
 
   const handleAdd = () => {
-    const userId = Number(localStorage.getItem("current_user")) || 1;
     const tags = JSON.parse(localStorage.getItem("tags")) || [];
 
     tags.push({
@@ -30,7 +29,10 @@ const AddTag = ({ onAdded }) => {
         onClick={() => setShow(true)}
       >
         <span className="text-white fs-4">
-          <span>+</span> <span>Configurer un nouveau traqueur RFID</span>
+          <span className="text-white">+</span>{" "}
+          <span className="text-white">
+            Configurer un nouveau traqueur RFID
+          </span>
         </span>
       </button>
 

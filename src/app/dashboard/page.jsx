@@ -13,6 +13,7 @@ import TagElement from "@/components/dashboard/TagElement";
 export default function DashboardPage() {
   const router = useRouter();
   const [currentUser, setCurrentUser] = useState(null);
+  const [mapMarkers, setMapMarkers] = useState(null);
   const [userAnimals, setUserAnimals] = useState([]);
   const [userTodos, setUserTodos] = useState([]);
   const [userNotifications, setUserNotifications] = useState([]);
@@ -32,6 +33,9 @@ export default function DashboardPage() {
     const notifications =
       JSON.parse(localStorage.getItem("notifications")) || [];
     const tags = JSON.parse(localStorage.getItem("tags")) || [];
+    const markers = JSON.parse(localStorage.getItem("marker")) || [];
+
+    setMapMarkers(markers);
 
     // Filter by current user
     setUserAnimals(animals.filter((a) => a.userId === user.id));
@@ -41,7 +45,7 @@ export default function DashboardPage() {
   }, [router]);
 
   return (
-    <div className="thm-bg-dark py-4 min-vh-100">
+    <div className="thm-bg-dark py-4 min-vh-100 w-100">
       <div className="container">
         <div className="d-flex justify-content-between">
           <div className="d-flex">
