@@ -15,7 +15,7 @@ export default function FirstTimeDataLoader() {
         id: generateIdCustomLength(10),
         name: "Mallam",
         password: "123",
-        email: "mallama@farm.com",
+        email: "mallam@farm.com",
       },
       {
         id: generateIdCustomLength(10),

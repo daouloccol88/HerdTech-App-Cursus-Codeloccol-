@@ -17,19 +17,30 @@ export default function RootLayout({ children }) {
       <body className="themed light">
         {showNavbar && <Navbar />}
 
-        <div className="d-flex">
+        <div className={showNavbar ? "d-flex" : "d-block"}>
           {/* Sidebar (mobile only, fixed) */}
-          <div className="d-block d-lg-none">
-            <div
-              className="position-fixed thm-bg-light"
-              style={{ width: "100px", height: "100vh", left: 0, top: 0 }}
-            >
-              <Sidebar />
+
+          {showNavbar && (
+            <div className="d-block d-lg-none">
+              <div
+                className="position-fixed thm-bg-light"
+                style={{ width: "100px", height: "100vh", left: 0, top: 0 }}
+              >
+                <Sidebar />
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Main content */}
-          <div className="flex-grow-1 thm-bg-dark main-content">{children}</div>
+          <div
+            className={
+              showNavbar
+                ? "flex-grow-1 thm-bg-dark main-content"
+                : "flex-grow-1 thm-bg-dark "
+            }
+          >
+            {children}
+          </div>
         </div>
 
         <FirstTimeDataLoader />

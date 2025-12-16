@@ -63,7 +63,7 @@ const TagsPage = () => {
             </svg>
           </div>
           <div className="pt-3 ms-2">
-            <p className="fs-3 no-wrap">Suive du troupeau</p>
+            <p className="fs-3 no-wrap">Suivi du troupeau</p>
           </div>
         </div>
       </div>

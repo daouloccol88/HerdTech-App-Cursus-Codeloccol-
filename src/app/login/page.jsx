@@ -153,7 +153,7 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={"Enter your email"}
-                    width="80%"
+                    width="90%"
                   />
                 </div>
 
@@ -163,7 +163,7 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder={"Enter your password"}
-                    width="80%"
+                    width="90%"
                   />
                 </div>
 
@@ -174,7 +174,7 @@ export default function LoginPage() {
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder={"type your password to confirm"}
-                      width="100%"
+                      width="90%"
                     />
                   </div>
                 )}
